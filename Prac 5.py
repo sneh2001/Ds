@@ -1,38 +1,45 @@
-list1 = [1,2,3,4,5,6,7,8,9,10]
-print("List = ",list1)
-size = len(list1)
-def binary_search(x):
-    print("BINARY SEARCHING")
-    low = 0
-    high = len(list1) - 1
-    mid = 0
-    while low <= high: 
-        mid = (high + low) // 2
-        if list1[mid] < x: 
-            low = mid + 1
-        elif list1[mid] > x: 
-            high = mid - 1
-        else: 
-            return mid 
-    return "None it not in the list"
+class Array:
+    
+    def __init__(self,array,number):
+        self.lst = sorted(array)
+        self.number = number
+    def binary_search(self,lst,n,start,end):
+    
+        if start <= end:
+            mid = (end + start) // 2
+            if lst[mid] == n:
 
+                return f'position: {mid}'
+            elif lst[mid] > n:
+                return binary_search(lst,n,start,mid-1)
+            else:
+                return binary_search(lst,n,mid + 1,end)
+        else:
+            return -1
+            
+    
+    def linear_search(self,lst,n):
+        for i in range(len(lst)):
+            if lst[i] == n:
+                return f'Position :{i}'
+        return -1
+    
+    def run_search(self):
+        while True:
+            print('Select the searching algorithm:')
+            print('1. Linear Search.')
+            print('2. Binary Search.')
+            print('3. quit.')
+            opt = int(input('Option: '))
+            if opt == 2:
+                print(search.binary_search(self.lst,self.number,0,len(lst)-1))
+            elif opt == 1:
+                print(search.linear_search(self.lst,self.number))
+            else:
+                break
+        
 
-
-def linear_search(n):
-	print("LINEAR SEARCHING")
-	if n not in list1:
-		print(n,"not in the list")
-	else:
-		for i in range(size):
-			if list1[i]==n:
-				print("index of ", n," is ",i)
-				
-n = input("Enter (L) for Linear search and  (B) for Binary search :")
-if n=="L" or n=="l":
-	y = int(input("Enter a no. from the given list1 "))
-	linear_search(y)
-elif n=="B" or n=="b":
-	y = int(input("Enter a no. from the given list1 "))
-	print("index of ",y," is ",binary_search(y))
-else:
-	print("Invalid input")
+lst = [1,2,3,4,5,6,7,8]
+number = 4
+search = Array(lst,number)
+search.run_search() 
